@@ -1,4 +1,4 @@
-package org.fedyiv;
+package org.fedyiv.concurrency.leetcode.foobar;
 
 
 
@@ -10,7 +10,7 @@ import org.fedyiv.concurrency.leetcode.foobar.lock.FooBar;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-public class Main {
+public class App {
 
     private static final int N = 50;
 
