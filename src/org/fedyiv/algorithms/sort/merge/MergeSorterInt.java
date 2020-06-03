@@ -12,7 +12,7 @@ public class MergeSorterInt {
 
     private void mergeSort(List<Integer> list, int start, int end) {
 
-        //System.out.println("In mergeSort: start = " + start + ", end = " + end);
+        //System.out.println("In mergeSort: start = " + start + ", end = " + end); test
 
         if (start == end)
             return;
