@@ -9,14 +9,14 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertIterableEquals;
 
-class MergeSorterGenericTest {
+class MergeSorterGenericTest extends MergeSortBaseTest {
 
     @Test
     void sortInts() {
 
         MergeSorterGeneric<Integer> mergeSort = new MergeSorterGeneric<>();
 
-        List<Integer> testList = Arrays.asList(1, 9, 2, 8, 5, 7, 8, 1, 4, 6, 0, 9);
+        List<Integer> testList = generateIntegerRandomSequence(100000);
 
         mergeSort.sort(testList);
 
@@ -26,6 +26,16 @@ class MergeSorterGenericTest {
         Collections.sort(expectedList);
 
         assertIterableEquals(expectedList, testList);
+    }
+
+    @Test
+    void sortIntsPerformance() {
+
+        MergeSorterGeneric<Integer> mergeSort = new MergeSorterGeneric<>();
+
+        List<Integer> testList = generateIntegerRandomSequence(10000000);
+
+        mergeSort.sort(testList);
     }
 
     @Test
