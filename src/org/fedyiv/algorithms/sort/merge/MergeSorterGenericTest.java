@@ -1,5 +1,6 @@
 package org.fedyiv.algorithms.sort.merge;
 
+import org.fedyiv.helpers.RandomUtils;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -9,14 +10,14 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertIterableEquals;
 
-class MergeSorterGenericTest extends MergeSortBaseTest {
+class MergeSorterGenericTest  {
 
     @Test
     void sortInts() {
 
         MergeSorterGeneric<Integer> mergeSort = new MergeSorterGeneric<>();
 
-        List<Integer> testList = generateIntegerRandomSequence(100000);
+        List<Integer> testList = RandomUtils.generateIntegerRandomSequence(100000);
 
         mergeSort.sort(testList);
 
@@ -33,7 +34,7 @@ class MergeSorterGenericTest extends MergeSortBaseTest {
 
         MergeSorterGeneric<Integer> mergeSort = new MergeSorterGeneric<>();
 
-        List<Integer> testList = generateIntegerRandomSequence(10000000);
+        List<Integer> testList = RandomUtils.generateIntegerRandomSequence(10000000);
 
         mergeSort.sort(testList);
     }

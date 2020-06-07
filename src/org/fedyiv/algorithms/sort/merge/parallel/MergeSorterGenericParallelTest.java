@@ -1,6 +1,6 @@
 package org.fedyiv.algorithms.sort.merge.parallel;
 
-import org.fedyiv.algorithms.sort.merge.MergeSortBaseTest;
+import org.fedyiv.helpers.RandomUtils;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -11,13 +11,13 @@ import java.util.concurrent.ExecutionException;
 import static org.junit.jupiter.api.Assertions.assertIterableEquals;
 
 
-class MergeSorterGenericParallelTest extends MergeSortBaseTest {
+class MergeSorterGenericParallelTest {
 
     @Test
     public void  testParralelSort() throws ExecutionException, InterruptedException {
         MergeSorterGenericParallel<Integer> mergeSort = new MergeSorterGenericParallel<>();
 
-        List<Integer> testList = generateIntegerRandomSequence(1000);
+        List<Integer> testList = RandomUtils.generateIntegerRandomSequence(1000);
 
         mergeSort.sort(testList);
 
@@ -33,7 +33,7 @@ class MergeSorterGenericParallelTest extends MergeSortBaseTest {
 
         MergeSorterGenericParallel<Integer> mergeSort = new MergeSorterGenericParallel<>();
 
-        List<Integer> testList = generateIntegerRandomSequence(10000000);
+        List<Integer> testList = RandomUtils.generateIntegerRandomSequence(10000000);
 
         mergeSort.sort(testList);
     }
