@@ -22,7 +22,7 @@ public class HashMapTests {
         printMap(map);
 
 
-        array1[2] = 3;
+        array1[2] = 10;
 
         System.out.println("Array1 hashcode after elements change:" + array1.hashCode());
 
