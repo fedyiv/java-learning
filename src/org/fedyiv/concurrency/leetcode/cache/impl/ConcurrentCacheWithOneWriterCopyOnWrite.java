@@ -9,7 +9,7 @@ import java.util.Map;
  * Let's assume we need to create a concurrent cache such as only one thread is writing and all others are reading from the cache.
  * Also let's use HashMap as underlying data storage.
  */
-public class ConcurrentCacheWithOneWriterRecreate<K, V> implements ConcurrentCacheWithOneWriter<K,V> {
+public class ConcurrentCacheWithOneWriterCopyOnWrite<K, V> implements ConcurrentCacheWithOneWriter<K,V> {
 
     private volatile Map<K, V> map;
 
