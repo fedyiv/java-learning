@@ -1,5 +1,6 @@
 package org.fedyiv.concurrency.leetcode.cache;
 
+import org.fedyiv.concurrency.leetcode.cache.impl.ConcurrentCacheWithOneWriterReadWriteLock;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -23,12 +24,12 @@ class ConcurrentCacheWithOneWriterTest {
 
     public class Producer implements Runnable {
 
-        ConcurrentCacheWithOneWriter2<Integer, Integer> cache;
+        ConcurrentCacheWithOneWriter<Integer, Integer> cache;
         Queue<Map.Entry<Integer, Integer>> queue;
         Integer key = 1;
 
 
-        public Producer(ConcurrentCacheWithOneWriter2<Integer, Integer> cache, Queue<Map.Entry<Integer, Integer>> queue) {
+        public Producer(ConcurrentCacheWithOneWriter<Integer, Integer> cache, Queue<Map.Entry<Integer, Integer>> queue) {
             this.cache = cache;
             this.queue = queue;
         }
@@ -68,10 +69,10 @@ class ConcurrentCacheWithOneWriterTest {
 
     public class Consumer implements Runnable {
 
-        ConcurrentCacheWithOneWriter2<Integer, Integer> cache;
+        ConcurrentCacheWithOneWriter<Integer, Integer> cache;
         Queue<Map.Entry<Integer, Integer>> queue;
 
-        public Consumer(ConcurrentCacheWithOneWriter2<Integer, Integer> cache, Queue<Map.Entry<Integer, Integer>> queue) {
+        public Consumer(ConcurrentCacheWithOneWriter<Integer, Integer> cache, Queue<Map.Entry<Integer, Integer>> queue) {
             this.cache = cache;
             this.queue = queue;
         }
@@ -138,7 +139,7 @@ class ConcurrentCacheWithOneWriterTest {
     public void testKeyAvailableImmediatelyAfterPut() throws InterruptedException {
 
         Queue queue = new ConcurrentLinkedQueue<Map.Entry<Integer, Integer>>();
-        ConcurrentCacheWithOneWriter2<Integer, Integer> cache = new ConcurrentCacheWithOneWriter2<>();
+        ConcurrentCacheWithOneWriter<Integer, Integer> cache = new ConcurrentCacheWithOneWriterReadWriteLock<>();
 
         ExecutorService executorService = Executors.newCachedThreadPool();
 
