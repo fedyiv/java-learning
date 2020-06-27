@@ -23,8 +23,6 @@ public class FooBar {
             printFoo.run();
 
             fooTurn.set(false);
-            notify();
-
 
         }
     }
@@ -36,12 +34,10 @@ public class FooBar {
             while (fooTurn.get())
                 Thread.sleep(0);
 
-
             // printBar.run() outputs "bar". Do not change or remove this line.
             printBar.run();
 
             fooTurn.set(true);
-            notify();
 
 
         }
