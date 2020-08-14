@@ -1,4 +1,4 @@
-package org.fedyiv.concurrency.algorithms;
+package org.fedyiv.concurrency.algorithms.sum;
 
 import java.util.ArrayList;
 import java.util.List;

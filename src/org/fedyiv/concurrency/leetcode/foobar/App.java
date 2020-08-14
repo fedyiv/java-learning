@@ -1,11 +1,6 @@
 package org.fedyiv.concurrency.leetcode.foobar;
 
-
-
-
-
-
-import org.fedyiv.concurrency.leetcode.foobar.lock.FooBar;
+import org.fedyiv.concurrency.leetcode.foobar.atomic.FooBar;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;

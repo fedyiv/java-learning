@@ -1,4 +1,4 @@
-package org.fedyiv.concurrency.algorithms;
+package org.fedyiv.concurrency.algorithms.sum;
 
 import org.fedyiv.helpers.RandomUtils;
 import org.junit.jupiter.api.Assertions;
