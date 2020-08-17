@@ -48,17 +48,22 @@ public class MergeSorterForkJoin<T extends Comparable<T>> {
             if (start == end)
                 return;
 
-            int middle = start + (end - start) / 2;
+            if (end - start > 10) {
 
-            MergeSortWorker leftWorker = new MergeSortWorker(start, middle);
-            MergeSortWorker rightWorker = new MergeSortWorker(middle + 1, end);
+                int middle = start + (end - start) / 2;
 
-            leftWorker.fork();
-            rightWorker.fork();
-            leftWorker.join();
-            rightWorker.join();
+                MergeSortWorker leftWorker = new MergeSortWorker(start, middle);
+                MergeSortWorker rightWorker = new MergeSortWorker(middle + 1, end);
 
-            merge(start, middle, end);
+                leftWorker.fork();
+                rightWorker.fork();
+                leftWorker.join();
+                rightWorker.join();
+
+                merge(start, middle, end);
+            } else {
+                mergeSortSequential(start, end);
+            }
             return;
         }
     }
