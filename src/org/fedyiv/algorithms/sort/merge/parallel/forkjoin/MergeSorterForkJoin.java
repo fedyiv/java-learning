@@ -1,16 +1,17 @@
-package org.fedyiv.algorithms.sort.merge.parallel;
+package org.fedyiv.algorithms.sort.merge.parallel.forkjoin;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.*;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ForkJoinPool;
+import java.util.concurrent.RecursiveAction;
 
-public class MergeSorterGenericParallel<T extends Comparable<T>> {
+public class MergeSorterForkJoin<T extends Comparable<T>> {
 
 
     private Object[] array;
 
-    //There is a problem here for big lists, as the program will use number of threads up to N
-    private ExecutorService executor = Executors.newFixedThreadPool(16);
+    private ForkJoinPool forkJoinPool = new ForkJoinPool();
 
 
     public void sort(List<T> list) throws ExecutionException, InterruptedException {
@@ -19,7 +20,8 @@ public class MergeSorterGenericParallel<T extends Comparable<T>> {
 
         MergeSortWorker worker = new MergeSortWorker(0, list.size() - 1);
 
-        executor.submit(worker).get();
+        forkJoinPool.submit(worker).get();
+
 
         for (int i = 0; i < list.size(); i++)
             list.set(i, (T) array[i]);
@@ -28,7 +30,7 @@ public class MergeSorterGenericParallel<T extends Comparable<T>> {
     }
 
 
-    private class MergeSortWorker implements Callable<Void> {
+    private class MergeSortWorker extends RecursiveAction {
 
         int start;
         int end;
@@ -39,34 +41,25 @@ public class MergeSorterGenericParallel<T extends Comparable<T>> {
 
         }
 
+
         @Override
-        public Void call() throws Exception {
+        public void compute() {
 
             if (start == end)
-                return null;
+                return;
 
             int middle = start + (end - start) / 2;
 
+            MergeSortWorker leftWorker = new MergeSortWorker(start, middle);
+            MergeSortWorker rightWorker = new MergeSortWorker(middle + 1, end);
 
-            if (((ThreadPoolExecutor) executor).getActiveCount() < ((ThreadPoolExecutor) executor).getMaximumPoolSize() - 1) {
-                MergeSortWorker leftWorker = new MergeSortWorker(start, middle);
-                MergeSortWorker rightWorker = new MergeSortWorker(middle + 1, end);
-
-                Future<Void> leftResult = executor.submit(leftWorker);
-                Future<Void> rightResult = executor.submit(rightWorker);
-
-                leftResult.get();
-                rightResult.get();
-
-            } else {
-                mergeSortSequential(start, middle);
-                mergeSortSequential(middle + 1, end);
-            }
-
+            leftWorker.fork();
+            rightWorker.fork();
+            leftWorker.join();
+            rightWorker.join();
 
             merge(start, middle, end);
-
-            return null;
+            return;
         }
     }
 

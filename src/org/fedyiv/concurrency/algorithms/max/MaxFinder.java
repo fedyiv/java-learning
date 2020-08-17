@@ -55,6 +55,7 @@ public class MaxFinder<T extends Comparable<? super T>> {
 
                 leftSubArrayTask.fork();
                 rightSubArrayTask.fork();
+                //as an alternative we can call invokeAll(leftSubArrayTask,rightSubArrayTask)
 
 
                 return max(leftSubArrayTask.join(), rightSubArrayTask.join());
